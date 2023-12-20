@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  app:
+    image: wordpress:latest
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+    networks:
+      - word-2-maria
+
+  db:
+    image: mariadb:10.6.4-focal
+    environment:
+      MYSQL_ROOT_PASSWORD: Pa$$w0rd
+      MYSQL_DATABASE: wordpress2maria
+      MYSQL_USER: user
+      MYSQL_PASSWORD: Pa$$w0rd
+    volumes:
+      - data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - word-2-maria
+networks:
+  word-2-maria : {}
+volumes:
+  data:
