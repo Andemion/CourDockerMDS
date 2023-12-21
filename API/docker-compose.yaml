@@ -24,7 +24,7 @@ services:
   backoffice:
     image: backoffice
     ports:
-      - "5173:5173"
+      - "5173:80"
     depends_on:
       - mongo_db
       - back
