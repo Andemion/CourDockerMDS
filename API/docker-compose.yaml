@@ -10,9 +10,8 @@ services:
     networks:
       - resto-commande
 
-  api-rest-back:
-    build:
-        dockerfile: ./api-rest-back/Dockerfile
+  back:
+    image: back
     ports:
       - "9000:9000"
     depends_on:
@@ -23,15 +22,14 @@ services:
       - resto-commande
   
   backoffice:
-    build:
-      dockerfile: ./cours-api-rest-backoffice/Dockerfile
+    image: backoffice
     ports:
       - "5173:5173"
     depends_on:
       - mongo_db
-      - api-rest-back
+      - back
     environment:
-      VITE_API_URL: http://api-rest-back:9000/api
+      VITE_API_URL: http://back:9000/api
     networks:
       - resto-commande
 

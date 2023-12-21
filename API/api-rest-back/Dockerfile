@@ -1,7 +1,9 @@
 FROM node:alpine
-WORKDIR /api-back
+
+WORKDIR /back
+
 COPY package.json ./
-RUN npm install
+RUN npm install npm && npm update npm && npm install
 COPY . .
 EXPOSE 9000
 VOLUME /app/logs

@@ -1,13 +1,5 @@
-# A Lire
+CourDockerMDS\API\api-rest-back> docker build -t back .
 
-Faites un CTRL+SHIFT+F pour recherche dans tout le projet avec comme query "\_id", bien cocher la recherche match whole word and match case
+CourDockerMDS\CourDockerMDS\API\cours-api-rest-backoffice> docker build -t backoffice .
 
-![https://i.imgur.com/afA6n6n.png](https://i.imgur.com/afA6n6n.png)
-
-## Vous utiliser Mongoose ?
-
-Vous n'avez rien à faire de plus
-
-## Vous utiliser Sequelize ?
-
-Remplacer "\_id" par "id" à la place
+CourDockerMDS\api> docker-compose up
