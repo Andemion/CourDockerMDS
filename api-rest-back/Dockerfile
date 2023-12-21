@@ -1,6 +1,6 @@
-FROM node:alpine AS build-stage
+FROM node:alpine
 WORKDIR /api-back
-COPY package*.json ./
+COPY package.json ./
 RUN npm install
 COPY . .
 EXPOSE 9000

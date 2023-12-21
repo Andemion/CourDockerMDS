@@ -1,31 +1,27 @@
-version: '3.6'
+version: '3'
 
 services:
-  mongodb:
+  mongo_db:
     image: mongo:4.0-xenial
-    hostname: mongo
     ports:
       - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: DBapiBack
     networks:
       - resto-commande
 
- # api_back:
- #   build:
- #       context: .
- #       dockerfile: ./Dockerfile
- #   ports:
- #     - "9000:9000"
- #   depends_on:
- #     - mongodb
- #   networks:
- #     - resto-commande
- #   environment:
- #     - WAIT_HOSTS=mongodb:27017
- #     - WAIT_HOSTS_TIMEOUT=300
- #     - WAIT_SLEEP_INTERVAL=30
- #     - WAIT_HOST_CONNECT_TIMEOUT=30
-
+  api_back:
+    build:
+        dockerfile: ./Dockerfile
+    ports:
+      - "9000:9000"
+    depends_on:
+      - mongo_db
+    environment: 
+      - MONGO_URL=mongodb://mongo_db:27017/DBapiBack
+    networks:
+      - resto-commande
+      
 networks:
-  resto-commande : {}
-volumes:
-  data:
+  resto-commande : 
+    driver: bridge
