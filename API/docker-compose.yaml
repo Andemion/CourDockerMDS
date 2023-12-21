@@ -1,5 +1,5 @@
 version: '3'
-
+ 
 services:
   mongo_db:
     image: mongo:4.0-xenial
@@ -10,9 +10,9 @@ services:
     networks:
       - resto-commande
 
-  api_back:
+  api-rest-back:
     build:
-        dockerfile: ./Dockerfile
+        dockerfile: ./api-rest-back/Dockerfile
     ports:
       - "9000:9000"
     depends_on:
@@ -21,7 +21,20 @@ services:
       - MONGO_URL=mongodb://mongo_db:27017/DBapiBack
     networks:
       - resto-commande
-      
+  
+  backoffice:
+    build:
+      dockerfile: ./cours-api-rest-backoffice/Dockerfile
+    ports:
+      - "5173:5173"
+    depends_on:
+      - mongo_db
+      - api-rest-back
+    environment:
+      VITE_API_URL: http://api-rest-back:9000/api
+    networks:
+      - resto-commande
+
 networks:
-  resto-commande : 
+  resto-commande:
     driver: bridge
